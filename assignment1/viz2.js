@@ -16,6 +16,7 @@ var rowConverter = function(d) {
 var w = 600;
 var h = 375;
 var padding = 45;
+var legendOffset = 15;
 
 var xscale, yscale;
 var xaxis, yaxis;
@@ -260,7 +261,7 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                     .attr('opacity', 0)
                     .attr('class', 'legend_text')
                     .attr("transform",
-                    "translate(" + (w - padding*2 - 5) + "," + (h - 300) + ")")
+                    "translate(" + (w - padding*2 - legendOffset) + "," + (h - 300) + ")")
                     .style("text-anchor", "left")
                     .text("Men")
                     .transition()
@@ -271,7 +272,7 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                     .attr('opacity', 0)
                     .attr('class', 'legend_text')
                     .attr("transform",
-                    "translate(" + (w - padding*2 - 5) + "," + (h - 280) + ")")
+                    "translate(" + (w - padding*2 - legendOffset) + "," + (h - 280) + ")")
                     .style("text-anchor", "left")
                     .text("Women")
                     .transition()
@@ -281,7 +282,7 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                 svg.append("circle")
                     .attr('opacity', 0)
                     .attr('class', 'legend_circle')
-                    .attr('cx', w - padding*2 - 15)
+                    .attr('cx', w - padding*2 - legendOffset - 5)
                     .attr('cy', h - 305)
                     .attr("r", 3)
                     .attr('fill', colors["Men"])
@@ -292,7 +293,7 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                 svg.append("circle")
                     .attr('opacity', 0)
                     .attr('class', 'legend_circle')
-                    .attr('cx', w - padding*2 - 15)
+                    .attr('cx', w - padding*2 - legendOffset - 5)
                     .attr('cy', h - 285)
                     .attr("r", 3)
                     .attr('fill', colors["Women"])
@@ -358,7 +359,7 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                     .attr('opacity', 0)
                     .attr('class', 'legend_text')
                     .attr("transform",
-                    "translate(" + (w - padding*2 - 5) + "," + (h - 300) + ")")
+                    "translate(" + (w - padding*2 - legendOffset) + "," + (h - 300) + ")")
                     .style("text-anchor", "left")
                     .text(toPlot)
                     .transition()
@@ -368,7 +369,7 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                 svg.append("circle")
                     .attr('opacity', 0)
                     .attr('class', 'legend_circle')
-                    .attr('cx', w - padding*2 - 15)
+                    .attr('cx', w - padding*2 - legendOffset - 5)
                     .attr('cy', h - 305)
                     .attr("r", 3)
                     .attr('fill', colors[toPlot])
