@@ -5,12 +5,28 @@
         <title>02806 Assignment 1</title>
         <script type="text/javascript" src="d3/d3.js"></script>
         <style media="screen">
-            #men_circles.hidden {
+            #tooltip {
+                position: absolute;
+                width: 200px;
+                height: auto;
+                padding: 10px;
+                background-color: lightsteelblue;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                -webkit-box-shadow: 4px 40px 10px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+                box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+                pointer-events: none;
+            }
+            #tooltip.hidden {
                 display: none;
             }
-
-            #women_circles.hidden {
-                display: none;
+            #tooltip p {
+                margin: 0;
+                font-family: sans-serif;
+                font-size: 16px;
+                line-height: 20px;
             }
         </style>
     </head>
@@ -121,7 +137,12 @@
         <h2>Part 4: Viz 2</h2>
         <div id="viz2"></div>
         <button id="men_button" value="Men">Men</button>   <button id="women_button" value="Women">Women</button>   <button id="both_button" value="Both">Both</button><br>
-        <script type="text/javascript", src="viz2_dupe.js"></script>
+        <div id="tooltip" class="hidden">
+            <p><span id="title">Title</span></p>
+            <p><span id="time">Time</span></p>
+            <p><span id="year">Year</span></p>
+        </div>
+        <script type="text/javascript", src="viz2.js"></script>
 
     </body>
 </html>
