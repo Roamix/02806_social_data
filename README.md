@@ -2,7 +2,7 @@
 
 ## Group members
 S144222 - Daniel Thoren
-S14XXXX - Kristofer Hjort
+S14XXXX - Christoffer Hjort
 S14XXXX - Michael Jensen
 
 ## Resources
