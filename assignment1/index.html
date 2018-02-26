@@ -50,12 +50,12 @@
 					</section>
 					<section>
 						<section>
-							<p>This assignment explores data visualization in four sections:</p>
+							<p>This webpage explores data visualization and answers questions in accordance to assignment one, which consists of four sections:</p>
 							<ol>
-								<li>DAOST Chapter 2 Questions</li>
-								<li>DAOST Chapter 3 Questions</li>
-								<li>Viz 1</li>
-								<li>Viz 2</li>
+								<li><a href="#Part1">DAOST Chapter 2 Questions</a></li>
+								<li><a href="#Part2">DAOST Chapter 3 Questions</a></li>
+								<li><a href="#Part3">Viz 1</a></li>
+								<li><a href="#Part4">Viz 2</a></li>
 							</ol>
 						</section>
 					</section>
@@ -90,8 +90,9 @@
 
 					<!-- Part 1: DAOST Chapter 2 Questions -->
 					<div class="spotlight">
-						<div class="content">
+						<div id="Part1" class="content">
 							<h2>DAOST Chapter 2 Questions</h2>
+							<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a>
 							<h3>Purpose of a jitter plot.</h3>
 
 							<p>
@@ -112,31 +113,86 @@
 
 							<h3>When can KDEs be misleading?</h3>
 
-							Kernel Density Estimates (KDEs) are conceivably better than histograms at representing and retaining the integrity of certain data sets. Handling outliers, lack of bin size / allignement and unabridged representation  gives them an advantage over histograms in many cases.
-
-							However, KDEs have some disadvantage which can be seen on figure 2-4 (the count is not accurate)
+							<p>
+								Kernel Density Estimates (KDEs) are conceivably better than histograms at representing and retaining the integrity of certain data sets. Handling outliers, lack of bin size / allignement and unabridged representation gives them an advantage over histograms in many cases.
+							</p>
 
 							<img src="/assignment1/images/fig24.png" alt="" height="100%" width="100%"/>
 
-							 arguably
-							<!-- The author of DAOST (Philipp Janert) likes KDEs (and think they're better than histograms). And I don't. I didn't give a detailed explanation in the video, but now that works to my advantage. I'll ask you guys to think about this and thereby create an excellent exercise: When can KDEs be misleading? -->
+							<p>
+								However, KDEs have some disadvantage which can be seen above on figure 2-4. The data, which shows the distribution of US presidents' time-in-office durations, uses two KDE's with different bandwidths on top of the histogram. The issue with this KDE visualization, is that the number of occurences is pracically impossible to read off the graph with a human eye.
+							</p>
 
-							<h3>I've discussed some strengths of the CDF - there are also weaknesses. Janert writes "[CDFs] have less intuitive appeal than histograms of KDEs". What does he mean by that?</h3>
-							<h3>What is a Quantile plot? What is it good for.</h3>
-							<h3>How is a Probablity plot defined? What is it useful for? Have you ever seen one before?</h3>
-							<h3>One of the reasons I like DAOST is that Janert is so suspicious of mean, median, and related summary statistics. Explain why one has to be careful when using those - and why visualization of the full data is always better.</h3>
-							<h3>I love box plots. When are box plots most useful?</h3>
+							<p>
+								Small, sparse, discrete and volatile data-sets such as the presidency data are espeically bad for KDE representation and can be very misleading. A peak exists between 40 and 50 months of presidency, however the number of presidents that stayed in office for that duration could be misread to approximately 7, where the true value is 14.
+							</p>
+
+							<h3>CDF weaknesses</h3>
+
+							<p>
+								Cumulative Density Functions (CDFs) are useful in with other graphs as can be seen below in figure 2-7. The interquartile ranges can easily be estimated using the CDF however statistics such as mean, median and mode are much harder to read of a CDF.
+							</p>
+
+							<img src="/assignment1/images/fig27.png" alt="" height="100%" width="100%"/>
+
+							<h3>Quantile plots.</h3>
+
+							Quantile plots, are essentially x-y inverted CDF plots. They focus more on the quartiles/percentile distribution.
+
+							<h3>Probablity Plots</h3>
+
+							<p>
+								A probablity plot is constructed by plotting a supposedly Gaussian distributed data-set transformed through the inverse of the Guassian distribution function which it supposedly follows.
+								<br />
+								If the data follows the distribution perfectly, we should expect to see a straight line where the gradient is the standard deviation and the zero intercept a Mu. Any deviations from the Guassian distribution will be clearly visible.
+								<br />
+								I've personally never seen one before.
+							</p>
+
+							<h3>Summary statistics: Mean, median and more.</h3>
+							<p>
+								Just like anything in life we have to be context-aware - this is especially true in the data visualization. Don't bring a knife to a gunfight and don't use median price of a company's stock to say too much about the company itself.
+								<br />
+								Similiarly Janert notes that when dealing with symmetric single peak data with few outliers, the mean and standard deviation are useful describers. However, the fewest data sets have all of these properties and therefore these statistics should rarely be used.
+								<br />
+								On the other hand summary statistics such as median, quantiles and percentiles deal better with noisey and asymetric data and still tell us just as much - if note more - about the distribution. On the downside, they can be abstract and vague when trying to connect make assumption about the data.
+							</p>
+
+							<h3>Box plots</h3>
+							<p>
+								Box plots packs median, interquartile ranges, upper / lower adjacent data points and - arguably most usefully - outliers. No other plots visualize outliers as explicitly as box plots.
+							</p>
+
 							<h3>The book doesn't mention violin plots. Are those better or worse than box plots? Why?</h3>
-							<!-- <ul class="actions">
-								<li><a href="#" class="button alt">Details</a></li>
-							</ul> -->
+
+							<p>
+								The violin chart from <a href="https://blog.modeanalytics.com/violin-plot-examples/">mode analytics</a> shows how the weight of baby chicks depends on different types of feed. The plot is relatively simple considering how much data it actually represents:
+								<ul>
+									<li>
+										Two sexes
+									</li>
+									<li>
+										Six distinct types of feed
+									</li>
+									<li>
+										Continous distributions for each combination of sex and feed.
+									</li>
+									<li>
+										Box plot statistics
+									</li>
+								</ul>
+
+								<img src="/assignment1/images/figvio.png" alt="" height="75%" width="75%"/>
+
+							</p>
 						</div>
 					</div>
 
 					<!-- Part 2: DAOST Chapter 3 Questions -->
 					<div class="spotlight">
-						<div class="content">
+						<div id="Part2" class="content">
 							<h2>Part 2: DAOST Chapter 3 Questions</h2>
+							<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a>
 			            <ul>
 			                <li>Looking at Fig 3-1, Janert writes "the data itself shows clearly that the amount of random noise in the data is small". What do you think his argument is?</li>
 			                    <ul>
@@ -200,8 +256,9 @@
 						<!-- <div class="image">
 							<img src="images/pic03.jpg" alt="" />
 						</div> -->
-						<div class="content">
+						<div id="Part3" class="content">
 							<h3>Part 3: Viz 1</h3>
+							<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a>
 							<p>Lorem ipsum nisl sed cursus magna et amet veroeros. Sed phasellus malesuada quis orci. Pellentesque eget consequat.</p>
 							<!-- <ul class="actions">
 								<li><a href="#" class="button alt">Details</a></li>
@@ -214,8 +271,9 @@
 						<!-- <div class="image">
 							<img src="images/pic03.jpg" alt="" />
 						</div> -->
-						<div class="content">
+						<div id="Part4" class="content">
 							<h3>Part 4: Viz 2</h3>
+							<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a>
 							<p>
 			            Re-creating I Quant NY. <br>
 			            This is a reproduction of
