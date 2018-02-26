@@ -94,9 +94,6 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
             yscale.domain([d3.min(data, function(d) {return d.Time;})-1,
                            d3.max(data, function(d) {return d.Time;})+1]);
 
-            xaxis = d3.axisBottom(xscale);
-            yaxis = d3.axisLeft(yscale);
-
             svg.selectAll("circle")
                 .remove();
 
