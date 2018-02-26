@@ -27,7 +27,7 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
         var data_both = d3.merge([data_men, data_women]);
 
         var labels = ["Men", "Women", "Both"];
-        var colors = {"Men":"navy", "Women":"teal"};
+        var colors = {"Men":"navy", "Women":"rgb(105, 0, 200)"};
         var radius = 3;
 
         /// UPDATE TO MEN ONLY ///
@@ -124,12 +124,9 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                        d3.select(this)
                             .attr('fill', 'orange')
 
-                       var xPosition = parseFloat(d3.select(this).attr('cx'));
-                       var yPosition = parseFloat(d3.select(this).attr('cy'));
-
                        d3.select('#tooltip')
                             .style("left", (d3.event.pageX + 12) + "px")
-                            .style('top', (d3.event.pageY - 10) + "px")
+                            .style('top', (window.pageYOffset - d.Time + 80) + "px")
                             .style("opacity", 0.9)
                             .select('#time')
                             .text("Minutes: " + parseInt(d.Time))
@@ -174,7 +171,6 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
             		var my1 = men_leastSquaresCoeff[0] + men_leastSquaresCoeff[1];
             		var mx2 = mxLabels[mxLabels.length - 1];
             		var my2 = men_leastSquaresCoeff[0] * mxSeries.length + men_leastSquaresCoeff[1];
-            		// var mtrendData = [[mx1,my1,mx2,my2]];
 
                     // WOMEN
             		var wx1 = wxLabels[0];
@@ -221,12 +217,9 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                        d3.select(this)
                             .attr('fill', 'orange')
 
-                       var xPosition = parseFloat(d3.select(this).attr('cx'));
-                       var yPosition = parseFloat(d3.select(this).attr('cy'))+14;
-
                        d3.select('#tooltip')
                             .style("left", (d3.event.pageX + 12) + "px")
-                            .style('top', (d3.event.pageY - 38) + "px")
+                            .style('top', (window.pageYOffset - d.Time + 80) + "px")
                             .style("opacity", 0.9)
                             .select('#time')
                             .text("Minutes: " + parseInt(d.Time))
@@ -319,12 +312,9 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                        d3.select(this)
                             .attr('fill', 'orange')
 
-                       var xPosition = parseFloat(d3.select(this).attr('cx'));
-                       var yPosition = parseFloat(d3.select(this).attr('cy'))+14;
-
                        d3.select('#tooltip')
                             .style("left", (d3.event.pageX + 12) + "px")
-                            .style('top', (d3.event.pageY - 38) + "px")
+                            .style('top', (window.pageYOffset - d.Time + 80) + "px")
                             .style("opacity", 0.9)
                             .select('#time')
                             .text("Minutes: " + parseInt(d.Time))
@@ -435,7 +425,8 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
             .attr("transform",
             "translate(" + (w/2) + "," + (h) + ")")
             .style("text-anchor", "middle")
-            .text("Year");
+            .text("Year")
+            .attr('font-size', '14px');
 
         svg.append("text")
             .attr("transform", "rotate(-90)")
@@ -443,7 +434,8 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
             .attr("x",0 - (h / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("Value");
+            .text("Value")
+            .attr('font-size', '14px');
 
 
     });

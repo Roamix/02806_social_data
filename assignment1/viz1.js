@@ -1,21 +1,3 @@
-//data
-// Month,Count
-// Jan,0
-// Feb,0
-// Mar,0
-// Apr,0
-// May,0
-// Jun,1
-// Jul,7
-// Aug,8
-// Sep,10
-// Oct,5
-// Nov,0
-// Dec,0
-
-//Width and height
-
-
 var rowConverter2 = function(d) {
     return {
         Month: d.Month,
@@ -29,7 +11,7 @@ var padding = 35;
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
 
 var xScale, yScale;
-var xaxis, yaxis;
+var xAxis, yAxis;
 
 d3.csv('data\\fresh_fruit.csv', rowConverter2, function(ffruit) {
     d3.csv('data\\fresh_vegetable.csv', rowConverter2, function(fvege) {
@@ -38,26 +20,27 @@ d3.csv('data\\fresh_fruit.csv', rowConverter2, function(ffruit) {
 
                 d3.select("#ffruit_button")
                     .on("click", function() {
-                        updateData(ffruit);
+                        updateData(ffruit, "Fresh Fruit");
                     });
 
                 d3.select("#sfruit_button")
                     .on("click", function() {
-                        updateData(sfruit);
+                        updateData(sfruit, "Storage Fruit");
                     });
 
                 d3.select("#fvege_button")
                     .on("click", function() {
-                        updateData(fvege);
+                        updateData(fvege, "Fresh Vegetables");
                     });
 
                 d3.select("#svege_button")
                     .on("click", function() {
-                        updateData(svege);
+                        updateData(svege, "Storage Vegetables");
                     });
 
 
                 var dataset = ffruit;
+                var barcolor = "rgb(105, 0, 200)";
 
                 xScale = d3.scaleBand()
                             .domain(d3.range(dataset.length))
@@ -69,12 +52,12 @@ d3.csv('data\\fresh_fruit.csv', rowConverter2, function(ffruit) {
                             .domain([0, d3.max(dataset, function(d) { return d.Count;})])
                             .range([h - padding, padding]);
 
-                xaxis = d3.axisBottom(xScale)
+                xAxis = d3.axisBottom(xScale)
                             .tickFormat(function(d, i) {
                                 return months[i];
                             });
 
-                yaxis = d3.axisLeft(yScale);
+                yAxis = d3.axisLeft(yScale);
 
                 //Create SVG element
                 var svg = d3.select(".viz1")
@@ -95,12 +78,8 @@ d3.csv('data\\fresh_fruit.csv', rowConverter2, function(ffruit) {
                     .attr("width", xScale.bandwidth())
                     .attr("height", function(d) {
                         return h - yScale(d.Count) - padding;
-                        // return h - yScale(d.Count) - (padding-15);
                     })
-                    .attr('fill', 'navy')
-                    // .attr("fill", function(d) {
-                    //     return "rgb(0, 0, " + Math.round(d.Count * 10) + ")";
-                    // })
+                    .attr('fill', barcolor)
                     .on("mouseover", function() {
                         d3.select(this)
                             .attr("fill", "orange");
@@ -109,8 +88,7 @@ d3.csv('data\\fresh_fruit.csv', rowConverter2, function(ffruit) {
                        d3.select(this)
                             .transition()
                             .duration(250)
-                            .attr('fill', "navy");
-                            // .attr("fill", "rgb(0, 0, " + (d.Count * 10) + ")");
+                            .attr('fill', barcolor);
                     });
 
                 //Create labels
@@ -132,21 +110,45 @@ d3.csv('data\\fresh_fruit.csv', rowConverter2, function(ffruit) {
                     .attr("font-size", "11px")
                     .attr("fill", "white");
 
+                //// ADD AXES ////
                 svg.append("g")
                      .attr("class", "x axis")
                      .attr("transform", "translate(0," + (h - padding) + ")")
-                     .call(xaxis);
+                     .call(xAxis);
 
                 svg.append("g")
                      .attr("class", "y axis")
                      .attr("transform", "translate(" + padding + ",0)")
-                     .call(yaxis);
+                     .call(yAxis);
+
+                //// ADD AXIS LABELS ////
+                svg.append("text")
+                    .attr('class', 'title')
+                    .attr("transform",
+                    "translate(" + (w/2) + "," + (padding) + ")")
+                    .style("text-anchor", "middle")
+                    .text("Fresh Fruit")
+                    .attr('font-size', '20px');
+
+                svg.append("text")
+                    .attr("transform",
+                    "translate(" + (w/2) + "," + (h) + ")")
+                    .style("text-anchor", "middle")
+                    .text("Month")
+                    .attr('font-size', '14px');
+
+                svg.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0)
+                    .attr("x",0 - (h / 2))
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .text("Produce")
+                    .attr('font-size', '14px');
 
                 ////////// UPDATE DATA //////////
-                var updateData = function(dataset) {
+                var updateData = function(dataset, title) {
 
-                    // xscale.domain([0, d3.max(dataset, function(d) {return d[0];})]);
-                    // console.log(d3.max(dataset, function(d) { return d.Count;}));
                     yScale.domain([0, d3.max(dataset, function(d) { return d.Count;})])
 
                     svg.selectAll("rect")
@@ -179,15 +181,18 @@ d3.csv('data\\fresh_fruit.csv', rowConverter2, function(ffruit) {
                             return yScale(d.Count) + 14;
                         });
 
+                    svg.select(".title")
+                        .text(title);
+
                     svg.select(".x.axis")
                         .transition()
                         .duration(1000)
-                        .call(xaxis);
+                        .call(xAxis);
 
                     svg.select(".y.axis")
                         .transition()
                         .duration(1000)
-                        .call(yaxis);
+                        .call(yAxis);
 
                 }
 
