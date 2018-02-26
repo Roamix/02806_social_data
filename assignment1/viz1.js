@@ -35,10 +35,6 @@ d3.csv('data\\fresh_fruit.csv', rowConverter2, function(ffruit) {
     d3.csv('data\\fresh_vegetable.csv', rowConverter2, function(fvege) {
         d3.csv('data\\storage_fruit.csv', rowConverter2, function(sfruit) {
             d3.csv('data\\storage_vegetable.csv', rowConverter2, function(svege) {
-                // console.log(ffruit);
-                // console.log(fvege);
-                // console.log(sfruit);
-                // console.log(svege);
 
                 d3.select("#ffruit_button")
                     .on("click", function() {

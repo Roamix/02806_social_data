@@ -125,11 +125,11 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
                             .attr('fill', 'orange')
 
                        var xPosition = parseFloat(d3.select(this).attr('cx'));
-                       var yPosition = parseFloat(d3.select(this).attr('cy'))+14;
+                       var yPosition = parseFloat(d3.select(this).attr('cy'));
 
                        d3.select('#tooltip')
                             .style("left", (d3.event.pageX + 12) + "px")
-                            .style('top', (d3.event.pageY - 38) + "px")
+                            .style('top', (d3.event.pageY - 10) + "px")
                             .style("opacity", 0.9)
                             .select('#time')
                             .text("Minutes: " + parseInt(d.Time))
