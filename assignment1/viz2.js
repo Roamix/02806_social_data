@@ -434,7 +434,7 @@ d3.csv('data\\part4_mens_open.csv', rowConverter, function(data_men) {
             .attr("x",0 - (h / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("Value")
+            .text("Time")
             .attr('font-size', '14px');
 
 
