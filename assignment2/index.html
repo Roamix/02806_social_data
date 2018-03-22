@@ -9,9 +9,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 	<title>Assignment 2</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="assets/css/main.css" />
-	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	<script type="text/javascript" src="d3/d3.js"></script>
 	<style media="screen">
 	#tooltip {
@@ -62,33 +60,11 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 		</div>
 	</section>
 
-	<!-- One -->
-	<!-- <section id="one" class="wrapper">
-	<div class="inner split">
-	<section>
-	<h2>Magna feugiat adipiscing</h2>
-	<p>Lorem ipsum nisl sed cursus magna et amet veroeros. Sed phasellus aliquam et tempus lorem feugiat adipiscing lorem. Morbi pharetra vitae felis placerat pharetra. Nulla risus orci, dapibus id malesuada et nec, malesuada quis orci. Pellentesque eget consequat.</p>
-	<ul class="actions">
-	<li><a href="#" class="button alt">Learn more</a></li>
-</ul>
-</section>
-<section>
-<h2>Contents</h2>
-<ol>
-<li>DAOST Chapter 2 Questions</li>
-<li>DAOST Chapter 3 Questions</li>
-<li>Viz 1</li>
-<li>Viz 2</li>
-</ol>
-</section>
-</div>
-</section> -->
-
 <!-- Two -->
 <section id="two" class="wrapper style2 alt">
 	<div class="inner">
 
-		<!-- Part 1: DAOST Chapter 2 Questions -->
+		<!-- Part 1: Telling Data Stories -->
 		<div class="spotlight">
 			<div id="Part1" class="content">
 				<h2>Telling Data Stories</h2>
@@ -109,8 +85,8 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 				<p>
 					***
 				</p>
-				<!-- <img src="/assignment1/images/fig24.png" alt="" height="100%" width="100%"/> -->
-				<!-- <embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://vis.stanford.edu/files/2010-Narrative-InfoVis.pdf" width="500" height="375"> -->
+				<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://roamix.github.io/2010-Narrative-InfoVis-6.pdf" width="600" height="780">
+				<p style="color:gray;"><i>Figure 7</i></p>
 
 				<h3>Use Figure 7 to find the most common design choice within each category for the Visual narrative and Narrative structure (the categories within visual narrative are 'visual structuring', 'highlighting', etc).</h3>
 				<p>
@@ -125,45 +101,26 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 			</div>
 		</div>
 
-	<!-- Part 3: Viz 1 -->
+	<!-- Part 2: Viz 1 -->
 	<div class="spotlight">
-		<!-- <div class="image">
-		<img src="images/pic03.jpg" alt="" />
-	</div> -->
 	<div id="Part2" class="content">
 		<h3>Part 2: Viz</h3>
 		<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a>
 		<p>
-			Re-creating I Quant NY. <br>
-			This is a reproduction of
-			<a href=http://iquantny.tumblr.com/post/129373499164/this-is-quantifiably-the-best-month-to-go-to-the>This is Quantifiably the Best Month to go to the Farmers Market </a>
-		</p>
-		<p>
-			The visualization to the right shows the distrubution of Farmer's produce over a unspecified year.
+			The visualization to the right shows all murders in all of New York City over time. Each red dot is a murder,
+			and the timeline can be extended or shortened using the slider on the timeline.
+			<!-- The visualization to the right shows the distrubution of Farmer's produce over a unspecified year.
 			The buttons above the visualization control's which produce category to show.
 			<br>
 			It is easy to observe that fresh produce peaks in the mid-summer to fall seasons, i.e. July to Oktober.
 			What is interesting to observe, is that the storage produce peak inverse to fresh produce.
 			Storage produce peaks in the winter while being all time low in the mid-summer to fall.
 			This is not surprising, as there is no reason to storage produce in the mid-summer to fall seasons
-			when fresh produce is ready to be sold instead.
+			when fresh produce is ready to be sold instead. -->
 		</p>
-		<!-- <ul class="actions">
-		<li><a href="#" class="button alt">Details</a></li>
-	</ul> -->
 </div>
 <div class="viz">
-	<div>
-		<button id="ffruit_button" class="button alt" value="ffruit_button">Fresh Fruit</button>
-		<button id="sfruit_button" class="button alt" value="sfruit_button">Storage Fruit</button>
-	</div>
 
-	<div>
-		<button id="fvege_button" class="button alt" value="fvege_button">Fresh Vegetables</button>
-		<button id="svege_button" class="button alt" value="svege_button">Storage Vegetable</button>
-	</div>
-
-	<br>
 </div>
 </div>
 
@@ -178,8 +135,10 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/skel.min.js"></script>
 <script src="assets/js/util.js"></script>
-<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
+<script src="mainPlot.js"></script>
+<!-- <script src="d3Linegraph.js"></script> -->
+<!-- <script src="d3MapPoints.js"></script> -->
 
 </body>
 </html>
