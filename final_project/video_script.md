@@ -16,3 +16,4 @@
 * Are there any tendencies
   * Weather?
   * Construction work?
+* Has motor vehicle collisions or fatalities seen a decreasing trend throughout the years, as technology improves?
