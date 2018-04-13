@@ -4,7 +4,7 @@
 * Main dataset: [NYPD Motor Vehicle Collisions](https://data.cityofnewyork.us/Public-Safety/NYPD-Motor-Vehicle-Collisions/h9gi-nx95)
 * Ideas for datasets to cross-reference:
   * [Department of Transport](https://www.dot.ny.gov/projects) road works
-  * Weather data - someone find a link
+  * Weather data - https://www.ncdc.noaa.gov/cdo-web/search (https://opendata.stackexchange.com/questions/6602/new-york-city-weather-data)
   * Other datasets? - links?
 
 ## Script bullet points
@@ -16,4 +16,5 @@
 * Are there any tendencies
   * Weather?
   * Construction work?
+  * Specific streets or crossings where collision has higher tendencies?
 * Has motor vehicle collisions or fatalities seen a decreasing trend throughout the years, as technology improves?
