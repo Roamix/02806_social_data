@@ -56,6 +56,7 @@ var color = d3.scaleOrdinal()
 
 // Date formater and parsers
 var dateParser = d3.timeParse("%m/%d/%Y");
+// var dateParser = d3.timeParse("%Y/%m/%d");
 var dateFormater = d3.timeFormat("%Y/%m/%d");
 var yearFormater = d3.timeFormat("%Y");
 
@@ -73,6 +74,7 @@ d3.json("boroughs.geojson", function (json) {
 
     //Load in murder data
     d3.csv("all_murder.csv", function (data) {
+    //d3.csv("2017_collissions_coords.csv", function (data) {
 
         // Brush defenition, extent equals the in which we can scale it
         var brush = d3.brushX()
