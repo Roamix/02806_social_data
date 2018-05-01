@@ -61,7 +61,7 @@ var dateFormater = d3.timeFormat("%Y/%m/%d");
 var yearFormater = d3.timeFormat("%Y");
 
 //Load in GeoJSON data
-d3.json("boroughs.geojson", function (json) {
+d3.json("data/boroughs.geojson", function (json) {
 
     map.selectAll("path")
         .data(json.features)
@@ -73,8 +73,8 @@ d3.json("boroughs.geojson", function (json) {
         .attr("d", path);
 
     //Load in murder data
-    d3.csv("all_murder.csv", function (data) {
-    //d3.csv("2017_collissions_coords.csv", function (data) {
+    d3.csv("data/all_murder.csv", function (data) {
+    //d3.csv("data/2017_collissions_coords.csv", function (data) {
 
         // Brush defenition, extent equals the in which we can scale it
         var brush = d3.brushX()
