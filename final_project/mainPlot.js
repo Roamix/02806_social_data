@@ -56,7 +56,6 @@ var color = d3.scaleOrdinal()
 
 // Date formater and parsers
 var dateParser = d3.timeParse("%m/%d/%Y");
-// var dateParser = d3.timeParse("%Y/%m/%d");
 var dateFormater = d3.timeFormat("%Y/%m/%d");
 var yearFormater = d3.timeFormat("%Y");
 
