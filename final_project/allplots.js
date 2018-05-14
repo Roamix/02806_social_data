@@ -1,6 +1,6 @@
 // JavaScript source code
 
-d3.csv("data/2017_collisions_zip_all.csv", function make_map(error, input) {
+d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
     d3.json("data/nyc_zip.geojson", function (nycjson) {
 
     var data = input;
