@@ -1,8 +1,7 @@
 // JavaScript source code
 
-d3.csv("data/2017_collisions_all.csv", function make_map(error, input) {
-    // d3.json("data/police_precincts.json", function (nycjson) {
-    d3.json("data/nyc-boroughs.json", function (nycjson) {
+d3.csv("python/2017_collisions_zip_all.csv", function make_map(error, input) {
+    d3.json("data/nyc_zip.geojson", function (nycjson) {
 
     var data = input;
 
@@ -17,6 +16,7 @@ d3.csv("data/2017_collisions_all.csv", function make_map(error, input) {
 
     data.forEach(function (d) {
         d.DATE = parse_date(d.DATE);
+        d.ZIP_CODE = String(+d.ZIP_CODE)
     });
 
     // Crossfilter data
@@ -31,16 +31,9 @@ d3.csv("data/2017_collisions_all.csv", function make_map(error, input) {
     var vehicle_factor1_dim = cross_data.dimension(function (fact) { return fact.CONTRIBUTING_FACTOR_VEHICLE_1; });
     var vehicle_factor2_dim = cross_data.dimension(function (fact) { return fact.CONTRIBUTING_FACTOR_VEHICLE_2; });
 
-    // Borough grouper for barchart and geo chart
-    function pop_by_borough(dim) {
-        return dim.group().reduceCount();
-    }
     // Data groups
     var num_data_dates = date_dim.group(d3.timeDay);
-    var num_boroughs = pop_by_borough(borough_dim);
-    var geo_num_boroughs = pop_by_borough(geo_borough_dim);
-    // var num_boroughs = borough_dim.group();
-    // var geo_num_boroughs = borough_dim.group();
+    var num_boroughs = borough_dim.group();
     var num_zipcode = zipcode_dim.group();
 
     var num_vehicle_factor1 = vehicle_factor1_dim.group();
@@ -134,13 +127,11 @@ d3.csv("data/2017_collisions_all.csv", function make_map(error, input) {
     geo_chart
         .width(700)
         .height(500)
-        .dimension(geo_borough_dim)
-        .group(geo_num_boroughs)
+        .dimension(zipcode_dim)
+        .group(num_zipcode)
         .colors(d3.scaleQuantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
-        .colorDomain([0, 45000])
-        // .colorCalculator(function (d) { return d ? geo_chart.colors()(d) : '#ccc'; })
-        // .overlayGeoJson(nycjson.features, "Precinct", function(d) { return d.properties.Precinct;})
-        .overlayGeoJson(nycjson.features, "borough", function(d) { return d.properties.borough;})
+        .colorDomain([0, num_zipcode.top(1)[0].value])
+        .overlayGeoJson(nycjson.features, "zip", function(d) { return d.properties.postalCode;})
         .projection(nycprojection);
 
         dc.renderAll();
