@@ -7,11 +7,11 @@ d3.csv("data/2017_collisions_zip_all.csv", function make_map(error, input) {
 
     // Date formater
     function parse_date(d) {
-        return new Date(2017,
-            d.substring(0, 2) - 1,
-            d.substring(2, 4),
+        return new Date("20"+d.substring(0,2),
+            d.substring(2, 4) - 1,
             d.substring(4, 6),
-            d.substring(6, 8));
+            d.substring(6, 8),
+            d.substring(8, 10));
     }
 
     data.forEach(function (d) {
