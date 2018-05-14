@@ -52,23 +52,6 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 			left: 15%;
 
 		}
-	/* .linegraph {
-
-	}
-	.circle {
-		fill-opacity: 0.0;
-	}
-	.selected {
-		fill: #9932CC;
-		fill-opacity: 1.0;
-		stroke: #000000;
-
-		stroke-width: 1;
-		opacity: 0.25;
-	}
-	.viz {
-		background-color: none;
-	} */
 	</style>
 </head>
 <body>
@@ -80,7 +63,6 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 			<section>
 				<h2>NYC Vehicle Collisions</h2>
 				<h2><i><a href="https://github.com/suneman/socialdataanalysis2018/wiki">Social Data Analysis and Visualization</a></i></h2>
-				<!-- <h2>NYC Traffic Accidents<br><i><a href="https://github.com/suneman/socialdataanalysis2018/wiki">Social Data Analysis and Visualization</a></i></h2> -->
 			</section>
 			<section>
 				<section>
@@ -92,7 +74,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 					</ol>
 					<p>Unless otherwise specified, all figure references and diagrams are credit due to Edward Segel and Jeffrey Heer's paper <a href="http://vis.stanford.edu/files/2010-Narrative-InfoVis.pdf">Narrative Visualization: Telling Stories with Data</a> or to references within.</p>
 					<p>
-						If the page renders incorrectly - or images fail to show, an online version can be viewed <a href="https://dannydannydanny.github.io/oldpage/02806-Social-Data-Analysis-and-Visualization/assignment2/index.html">here.</a>
+						An explainer page can be found at <a href="/explainer.html">here.</a>
 					</p>
 					</section>
 				</section>
@@ -125,13 +107,9 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 					</div>
 				</div>
 
-				<!-- <div class="spotlight"> -->
-					<!-- <div class="viz" align="center"></div> -->
-				<!-- </div> -->
-
 			</div>
 
-			<div id=viz>
+			<div class="inner">
 				<div class="dc-data-count" style="float: left;">
 					<h2>
 
@@ -147,33 +125,49 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 				</div>
 
 				<div class='row'>
-					<div class='span6' id='factor1-chart'>
-						<h4>
-							Main accident factors
-							<span>
-								<a class="reset"
-								   href="allplots:factor1_chart.filterAll();dc.redrawAll();"
-								   style="display: none;">
-									reset
-								</a>
-							</span>
-						</h4>
+					<div class='col-md-6'>
+						<div id='factor1-chart'>
+							<h4>
+								Main accident factors
+								<span>
+									<a class="reset"
+									   href="allplots:factor1_chart.filterAll();dc.redrawAll();"
+									   style="display: none;">
+										reset
+									</a>
+								</span>
+							</h4>
+						</div>
+						<div id="borough-chart">
+							<h4>
+								Accidents by borough
+								<span>
+									<a class="reset"
+									   href="allplots:borough_chart.filterAll();dc.redrawAll();"
+									   style="display: none;">
+										reset
+									</a>
+								</span>
+							</h4>
+						</div>
 					</div>
-					<div class='span6' id='factor2-chart'>
-						<h4>
-							Secondary accident factors
-							<span>
-								<a class="reset"
-								   href="allplots:factor2_chart.filterAll();dc.redrawAll();"
-								   style="display: none;">
-									reset
-								</a>
-							</span>
-						</h4>
+					<div class='col-md-4'>
+						<div id='geo-chart'>
+							<h4>
+								Choropleth
+								<span>
+									<a class="reset"
+									   href="allplots:geo_chart.filterAll();dc.redrawAll();"
+									   style="display: none;">
+										reset
+									</a>
+								</span>
+							</h4>
+						</div>
 					</div>
 				</div>
-				
-				<div class='row'>
+
+				<!-- <div class='row'>
 					<div class='span12' id='geo-chart'>
 						<h4>
 							Choropleth
@@ -186,19 +180,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 							</span>
 						</h4>
 					</div>
-					<div class='span12' id='borough-chart'>
-						<h4>
-							Accidents by borough
-							<span>
-								<a class="reset"
-								   href="allplots:borough_chart.filterAll();dc.redrawAll();"
-								   style="display: none;">
-									reset
-								</a>
-							</span>
-						</h4>
-					</div>
-				</div>
+				</div> -->
 
 				<div class='row'>
 					<div class='span12' id='date-chart'>

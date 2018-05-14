@@ -27,17 +27,13 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
     var borough_dim = cross_data.dimension(function (fact) { return fact.BOROUGH; });
     var geo_borough_dim = cross_data.dimension(function (fact) { return fact.BOROUGH; });
     var zipcode_dim = cross_data.dimension(function (fact) { return fact.ZIP_CODE; });
-
     var vehicle_factor1_dim = cross_data.dimension(function (fact) { return fact.CONTRIBUTING_FACTOR_VEHICLE_1; });
-    var vehicle_factor2_dim = cross_data.dimension(function (fact) { return fact.CONTRIBUTING_FACTOR_VEHICLE_2; });
 
     // Data groups
     var num_data_dates = date_dim.group(d3.timeDay);
     var num_boroughs = borough_dim.group();
     var num_zipcode = zipcode_dim.group();
-
     var num_vehicle_factor1 = vehicle_factor1_dim.group();
-    var num_vehicle_factor2 = vehicle_factor2_dim.group();
 
     var all = cross_data.groupAll();
 
@@ -48,7 +44,6 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
     // Chart definitions
     var borough_chart = dc.barChart("#borough-chart");
     var factor1_chart = dc.pieChart("#factor1-chart");
-    var factor2_chart = dc.pieChart("#factor2-chart");
     var date_chart = dc.barChart("#date-chart");
     var geo_chart = dc.geoChoroplethChart("#geo-chart");
 
@@ -60,7 +55,7 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
 
     // Chart the borough
     borough_chart
-        .width(500)
+        .width(370)
         .height(300)
         .margins({ top: 0, right: 50, bottom: 35, left: 50 })
         .x(d3.scaleBand())
@@ -70,6 +65,8 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
         .yAxisLabel('Number of collisions')
         .dimension(borough_dim)
         .group(num_boroughs)
+        .elasticY(true)
+        .renderHorizontalGridLines(true)
         .barPadding(0.1)
         .outerPadding(0.05);
 
@@ -84,33 +81,19 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
         .legend(dc.legend())
         .on('pretransition', function (chart) {
             chart.selectAll('text.pie-slice').text(function (d) {
-                //return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2 * Math.PI) * 100) + '%';
-                return dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2 * Math.PI) * 100) + '%';
-            })
-        });
-
-    // Chart the factors 2
-    factor2_chart
-        .width(700)
-        .height(300)
-        .slicesCap(10)
-        .innerRadius(75)
-        .dimension(vehicle_factor2_dim)
-        .group(num_vehicle_factor2)
-        .legend(dc.legend())
-        .on('pretransition', function (chart) {
-            chart.selectAll('text.pie-slice').text(function (d) {
-                //return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2 * Math.PI) * 100) + '%';
                 return dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2 * Math.PI) * 100) + '%';
             })
         });
 
     date_chart
-        .width(990)
-        .height(200)
+        .width(1300)
+        .height(100)
         .margins({ top: 0, right: 50, bottom: 20, left: 40 })
         .dimension(date_dim)
         .group(num_data_dates)
+        .elasticY(true)
+        .renderHorizontalGridLines(true)
+        .yAxisLabel('Number of collisions')
         .centerBar(true)
         .gap(1)
         .x(d3.scaleTime().domain([minDate, maxDate]))
@@ -119,17 +102,19 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
         .xUnits(d3.timeDay);
 
 
+    choro_width = 680;
+    choro_height = 600;
     var nycprojection = d3.geoMercator()
   					.center([-73.94, 40.70])
-  					.scale(50000)
-  					.translate([(700) / 2, (500)/2]);
+  					.scale(60000)
+  					.translate([(choro_width) / 2, (choro_height)/2]);
 
     geo_chart
-        .width(700)
-        .height(500)
+        .width(choro_width)
+        .height(choro_height)
         .dimension(zipcode_dim)
         .group(num_zipcode)
-        .colors(d3.scaleQuantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+        .colors(d3.scaleQuantize().range(['#ffffe0','#fcf2df','#f9e4df','#f5d6de','#f1c8dd','#ecbadb','#e7aeda','#e1a0d8','#db93d6','#d486d4','#cd79d1','#c46dcd','#bc60c9','#b454c3','#ab48bd','#a23ab5','#992eac','#9021a0','#881391','#800080']))
         .colorDomain([0, num_zipcode.top(1)[0].value])
         .overlayGeoJson(nycjson.features, "zip", function(d) { return d.properties.postalCode;})
         .projection(nycprojection);

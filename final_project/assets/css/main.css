@@ -2609,6 +2609,7 @@
 		align-items: center;
 		border-bottom: solid 2px;
 		margin-bottom: 3em;
+		/* width: 1500px; */
 	}
 
 		.spotlight .image {
@@ -2678,7 +2679,7 @@
 		.wrapper > .inner {
 			margin-left: auto;
 			margin-right: auto;
-			width: 70em;
+			width: 90em;
 			max-width: 100%;
 		}
 
