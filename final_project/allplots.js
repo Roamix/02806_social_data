@@ -66,6 +66,7 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
         .dimension(borough_dim)
         .group(num_boroughs)
         .elasticY(true)
+        .colors(d3.scaleQuantize().range(['#9932CC']))
         .renderHorizontalGridLines(true)
         .barPadding(0.1)
         .outerPadding(0.05);
@@ -87,7 +88,7 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
 
     date_chart
         .width(1300)
-        .height(100)
+        .height(120)
         .margins({ top: 0, right: 50, bottom: 20, left: 40 })
         .dimension(date_dim)
         .group(num_data_dates)
@@ -95,6 +96,7 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
         .renderHorizontalGridLines(true)
         .yAxisLabel('Number of collisions')
         .centerBar(true)
+        .colors(d3.scaleQuantize().range(['#9932CC']))
         .gap(1)
         .x(d3.scaleTime().domain([minDate, maxDate]))
         .round(d3.timeDay.round)
@@ -114,7 +116,7 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
         .height(choro_height)
         .dimension(zipcode_dim)
         .group(num_zipcode)
-        .colors(d3.scaleQuantize().range(['#ffffe0','#fcf2df','#f9e4df','#f5d6de','#f1c8dd','#ecbadb','#e7aeda','#e1a0d8','#db93d6','#d486d4','#cd79d1','#c46dcd','#bc60c9','#b454c3','#ab48bd','#a23ab5','#992eac','#9021a0','#881391','#800080']))
+        .colors(d3.scaleQuantize().range(['#fff0f5','#fce2f2','#f8d6ef','#f4caec','#efbde9','#eab0e6','#e5a4e2','#df97df','#d88bdb','#d17fd7','#ca73d3','#c267cf','#ba5cca','#b150c3','#a944bc','#a138b4','#982caa','#90209f','#871291','#800080']))
         .colorDomain([0, num_zipcode.top(1)[0].value])
         .overlayGeoJson(nycjson.features, "zip", function(d) { return d.properties.postalCode;})
         .projection(nycprojection);
