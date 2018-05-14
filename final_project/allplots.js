@@ -69,7 +69,10 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
         .colors(d3.scaleQuantize().range(['#9932CC']))
         .renderHorizontalGridLines(true)
         .barPadding(0.1)
-        .outerPadding(0.05);
+        .outerPadding(0.05)
+        .title(function(d) {
+            return "Borough: " + d.key + "\nCollisions: " + d.value;
+        });
 
     // Chart the factors 1
     factor1_chart
@@ -84,6 +87,9 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
             chart.selectAll('text.pie-slice').text(function (d) {
                 return dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2 * Math.PI) * 100) + '%';
             })
+        })
+        .title(function(d) {
+            return "Main accident factor: " + d.key + "\nCollisions: " + d.value;
         });
 
     date_chart
@@ -118,8 +124,12 @@ d3.csv("data/collisions_zip_all.csv", function make_map(error, input) {
         .group(num_zipcode)
         .colors(d3.scaleQuantize().range(['#fff0f5','#fce2f2','#f8d6ef','#f4caec','#efbde9','#eab0e6','#e5a4e2','#df97df','#d88bdb','#d17fd7','#ca73d3','#c267cf','#ba5cca','#b150c3','#a944bc','#a138b4','#982caa','#90209f','#871291','#800080']))
         .colorDomain([0, num_zipcode.top(1)[0].value])
+        .colorCalculator(function (d) { return d ? geo_chart.colors()(d) : '#ccc'; })
         .overlayGeoJson(nycjson.features, "zip", function(d) { return d.properties.postalCode;})
-        .projection(nycprojection);
+        .projection(nycprojection)
+        .title(function(d) {
+            return "Zip code: " + d.key + "\nCollisions: " + d.value;
+        });
 
         dc.renderAll();
     });

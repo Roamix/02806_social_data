@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <!--
 Prism by TEMPLATED
 templated.co @templatedco
@@ -11,6 +11,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<script type="text/javascript" src="d3/d3.min.js"></script>
+	<script src="crossfilter/crossfilter.v1.min.js"></script>
 	<style media="screen">
 
 	</style>
@@ -22,22 +23,21 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 	<section id="banner">
 		<div class="inner split">
 			<section>
-				<h2>NYC Vehicle Collisions</h2>
-				<h2><i><a href="https://github.com/suneman/socialdataanalysis2018/wiki">Social Data Analysis and Visualization</a></i></h2>
+				<h2>NYC Vehicle Collisions<br>Explainer Page</h2>
 				<!-- <h2>NYC Traffic Accidents<br><i><a href="https://github.com/suneman/socialdataanalysis2018/wiki">Social Data Analysis and Visualization</a></i></h2> -->
 			</section>
 			<section>
 				<section>
-					<p>This webpage explores data visualization and answers questions in accordance to assignment two, which consists of two sections:</p>
+					<p>This webpage functions as an indepth explanation of how the data story came to life. The explanation is comprised of the following sections:</p>
 					<ol>
-						<li><a href="#Part1">NYC vehicle collisions since 2014</a></li>
-						<li><a href="#Part2">Visualization of vehicle collisions in NYC</a></li>
-						<li><a href="#Part3">Weather correllations with vehicle collisions in NYC</a></li>
+						<li><a href="#Part1">Motivation</a></li>
+						<li><a href="#Part2">Basic stats</a></li>
+						<li><a href="#Part3">Genre</a></li>
+						<li><a href="#Part4">Visualizations</a></li>
+						<li><a href="#Part5">Discussion</a></li>
+						<li><a href="#Part6">Contributions</a></li>
 					</ol>
-					<p>Unless otherwise specified, all figure references and diagrams are credit due to Edward Segel and Jeffrey Heer's paper <a href="http://vis.stanford.edu/files/2010-Narrative-InfoVis.pdf">Narrative Visualization: Telling Stories with Data</a> or to references within.</p>
-					<p>
-						If the page renders incorrectly - or images fail to show, an online version can be viewed <a href="https://dannydannydanny.github.io/oldpage/02806-Social-Data-Analysis-and-Visualization/assignment2/index.html">here.</a>
-					</p>
+					<p>The accompanying data story is found and <a href="/"></a>NYC Vehicle Collisions</p>
 					</section>
 				</section>
 			</div>
@@ -52,7 +52,28 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 					<div id="Part1" class="content">
 						<h2>Motivation</h2>
 
-						<p>Write me</p>
+						<p>
+							The datasets we have choosen for our project are the NYPD Motor-Vehicle-Collision and the NY NOAA Weather dataset:
+							<ul type="circle">
+								<li><a href="https://data.cityofnewyork.us/Public-Safety/NYPD-Motor-Vehicle-Collisions/h9gi-nx95" >data.cityofnewyork.us/Public-Safety/NYPD-Motor-Vehicle-Collisions</a></li>
+								<li><a href="https://www.ncdc.noaa.gov/cdo-web/datasets">www.ncdc.noaa.gov/cdo-web/datasets</a></li>
+							</ul>
+							The NYPD dataset contains over 1 million rows of data with multiple rows of same date value and 29 features, with the
+							NOAA dataset containing the same amount of rows as dates in the NYPD dataset and 4 features.
+						</p>
+
+						<p>
+							Motivation for this project started with the idea of cross referencing the NY vehicle accident dataset
+							with the NY weather dataset, and see how much of the data correlates to the number of accidents and type of accidents.
+							With this data we hoped that certain trends would emerge visually and give an overview of the most dangerous areas in NY
+							with regard to the traffic. This means we could potentially help warn trafficants of accident prone areas
+							and be extra vigilant.
+						</p>
+						<p>
+							Our end goal was to have the user explore the data with regard to seasonal weather and the accidents in the different boroughs.
+							We put more focus on a visualized dashboard rather than a narrative story since we hope that seeing how and why accidents happen
+							in the different boroughs would send a message of driving accordingly to the weather conditions.
+						</p>
 
 						<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a><br>
 					</div>
@@ -63,7 +84,48 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 					<div id="Part2" class="content">
 						<h2>Basic stats</h2>
 
-						<p>Write me</p>
+						<p>
+							Starting with the NYPD dataset containing traffic collisions we ran a check of data completeness in python with the pandas library,
+							to see how much data was missing from each feature. Here we see the first 7 features in which we concentrated on making a complete dataset.
+						</p>
+
+						<ul type="circle">
+							<li>DATE is 100.00% complete</li>
+							<li>TIME is 100.00% complete</li>
+							<li>BOROUGH is 71.36% complete</li>
+							<li>ZIP CODE is 71.35% complete</li>
+							<li>LATITUDE is 82.57% complete</li>
+							<li>LONGITUDE is 82.57% complete</li>
+							<li>LOCATION is 82.57% complete</li>
+						</ul>
+
+						<p>
+							As we see, latitude and longitude has around 17.5% missing data. The dataset is filtered by removing all rows where the data is not complete,
+							In this case we remove all observations with latitude or longitude missing.
+						</p>
+
+						<ul type="circle">
+							<li>DATE is 100.00% complete</li>
+							<li>TIME is 100.00% complete</li>
+							<li>BOROUGH is 83.08% complete</li>
+							<li>ZIP CODE is 83.08% complete</li>
+							<li>LATITUDE is 100.00% complete</li>
+							<li>LONGITUDE is 100.00% complete</li>
+							<li>LOCATION is 100.00% complete</li>
+						</ul>
+
+						<p>
+							This is repeated with zip code and borough, such that we only work with observations that do not miss borough, zip code, or latitude/longitude.
+							Similar processing is applied to the NOAA weather data, such that we only keep observations for the same dates that we also have collison data on.
+							As we found out later, the data actually need further scrutiny, since as "Main accident factors" (See Data story) in the NYPD dataset
+							contained empty values ' ' and 'Unspecified'. These values are in of itself also data but it turned out to classify
+							almost a 1/4 of the NYPD data and does then not properly explain the reason of the accident. Whether or not to keep
+							this data is hard to evaluate but as of now we have decided to keep it. This shows atleast that for all the incidents
+							alot of them have not been properly recorded in the dataset and can be a cause of wrongly skewed data.
+						</p>
+						<p>
+							After all the preprocessing we ended up with a total of <b>425.992</b> observations/data points.
+						</p>
 
 						<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a><br>
 					</div>
@@ -72,9 +134,28 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 				<!-- Part 3: Genre -->
 				<div class="spotlight">
 					<div id="Part3" class="content">
-						<h2>Basic stats</h2>
+						<h2>Genre</h2>
 
-						<p>Write me</p>
+						<p>
+							For our visual narrative we have:
+						</p>
+
+						<ul type="circle">
+							<li>Consistent visual platform</li>
+							<li>Feature distinction</li>
+							<li>Animated transitions</li>
+						</ul>
+
+						<p>
+							And for our narrative structure we have:
+						</p>
+
+						<ul type="circle">
+							<li>Random access</li>
+							<li>Filtering / Selection / Hover Highlighting / Details</li>
+							<li>Caption / Headlines</li>
+						</ul>
+
 
 						<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a><br>
 					</div>
@@ -85,7 +166,19 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 					<div id="Part4" class="content">
 						<h2>Visualizations</h2>
 
-						<p>Write me</p>
+						<p>
+						As we explained in the motivation, we put a heavy focus on a comprehensive and interactive
+						visualization dashboard. We wanted to have a dashboard where the user was free to play around and explore for them selves.
+						We decided for the following visualizations on the dashboard:
+						<ul>
+							<li>Donut chart</li>
+							<li>Bar chart</li>
+							<li>Choropleth</li>
+							<li>Timeline (Bar chart)</li>
+						</ul>
+						Furhtermore, we wanted ALL the figures to interact with each other, such that the user has maximum ability to filter and explore the data.
+						We chose these four different charts, because they cover most of the visualization types we learned about in this course.
+						</p>
 
 						<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a><br>
 					</div>
@@ -96,7 +189,11 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 					<div id="Part5" class="content">
 						<h2>Discussion</h2>
 
-						<p>Write me</p>
+						<p>dc, crossfilter, reason = performance opti,ization and eeasier implementation, missing stacked bar chart -> injured killed,
+						initially tried to plot all accidents as points on ny map, missing visualising weather data,
+						filtered after location;zipcodes or boroughs,
+
+						</p>
 
 						<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a><br>
 					</div>
