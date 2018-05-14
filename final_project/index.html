@@ -6,13 +6,53 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 -->
 <html>
 <head>
-	<title>Assignment 2</title>
+	<title>Final Project</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
-	<script type="text/javascript" src="d3/d3.js"></script>
+	<link href='bootstrap-3.3.7-dist/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	<link href='dc/dc.min.css' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="d3/d3.min.js"></script>
+	<script src='bootstrap-3.3.7-dist/js/bootstrap.min.js' type='text/javascript'></script>
+	<script src='jquery-3.3.1.min.js' type='text/javascript'></script>
+	<script src="crossfilter/crossfilter.v1.min.js"></script>
+	<script src="dc/dc.js"></script>
 	<style media="screen">
-	.linegraph {
+		.dc-data-count {
+			float: right;
+			margin-top: 15px;
+			margin-right: 15px;
+		}
+
+		.dc-data-count .filter-count {
+			color: #3182bd;
+			font-weight: bold;
+		}
+
+		.dc-data-count .total-count {
+			color: #3182bd;
+			font-weight: bold;
+		}
+
+		h4 span {
+			font-size: 10px;
+			font-weight: normal;
+		}
+/*
+		h2 {
+			float: right;
+		} */
+
+		h2 span {
+			font-size: 12px;
+			font-weight: normal;
+		}
+		#viz {
+			position: relative;
+			left: 15%;
+
+		}
+	/* .linegraph {
 
 	}
 	.circle {
@@ -28,7 +68,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 	}
 	.viz {
 		background-color: none;
-	}
+	} */
 	</style>
 </head>
 <body>
@@ -77,7 +117,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 				<!-- Part 2: Viz 1 -->
 				<div class="spotlight">
 					<div id="Part2" class="content">
-						<h2>Visualization of vehicle collisions in NYC</h2>
+						<h2>NY Traffic Accidents 2017</h2>
 
 						<p></p>
 
@@ -86,35 +126,123 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 				</div>
 
 				<!-- <div class="spotlight"> -->
-					<div class="viz" align="center"></div>
+					<!-- <div class="viz" align="center"></div> -->
 				<!-- </div> -->
 
+			</div>
 
+			<div id=viz>
+				<div class="dc-data-count" style="float: left;">
+					<h2>
 
-
-					<!-- Part 3: Correlations -->
-					<div class="spotlight">
-						<div id="Part3" class="content">
-							<h2>Correlations between weather and vehicle collisions</h2>
-
-							<p></p>
-
-							<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a>
-						</div>
-					</div>
-
-					<ul class="actions special">
-						<li><a href="#banner" class="button alt">Back To Top</a></li>
-					</ul>
+						<span>
+							<span class="filter-count"></span>
+							selected out of
+							<span class="total-count"></span>
+							records |
+							<a href="javascript:dc.filterAll(); dc.redrawAll();">Reset All</a>
+							<!-- <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a> -->
+						</span>
+					</h2>
 				</div>
-			</section>
+
+				<div class='row'>
+					<div class='span6' id='factor1-chart'>
+						<h4>
+							Main accident factors
+							<span>
+								<a class="reset"
+								   href="allplots:factor1_chart.filterAll();dc.redrawAll();"
+								   style="display: none;">
+									reset
+								</a>
+							</span>
+						</h4>
+					</div>
+					<div class='span6' id='factor2-chart'>
+						<h4>
+							Secondary accident factors
+							<span>
+								<a class="reset"
+								   href="allplots:factor2_chart.filterAll();dc.redrawAll();"
+								   style="display: none;">
+									reset
+								</a>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class='row'>
+					<div class='span12' id='geo-chart'>
+						<h4>
+							Choropleth
+							<span>
+								<a class="reset"
+								   href="allplots:geo_chart.filterAll();dc.redrawAll();"
+								   style="display: none;">
+									reset
+								</a>
+							</span>
+						</h4>
+					</div>
+					<div class='span12' id='borough-chart'>
+						<h4>
+							Accidents by borough
+							<span>
+								<a class="reset"
+								   href="allplots:borough_chart.filterAll();dc.redrawAll();"
+								   style="display: none;">
+									reset
+								</a>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class='row'>
+					<div class='span12' id='date-chart'>
+						<h4>
+							Timeline
+							<span>
+								<a class="reset"
+								   href="allplots:date_chart.filterAll();dc.redrawAll();"
+								   style="display: none;">
+									reset
+								</a>
+							</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="inner">
+				<!-- Part 3: Correlations -->
+				<div class="spotlight">
+					<div id="Part3" class="content">
+						<h2>Correlations between weather and vehicle collisions</h2>
+
+						<p></p>
+
+						<a href="#" class="button alt" style="margin-bottom: 50px">Back To Top</a>
+					</div>
+				</div>
+
+				<ul class="actions special">
+					<li><a href="#banner" class="button alt">Back To Top</a></li>
+				</ul>
+			</div>
+		</section>
 
 			<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script src="mainPlot.js"></script>
+			<script src="allplots.js">
+
+			</script>
+			<!-- <script src="mainPlot.js"></script> -->
 
 		</body>
 		</html>
