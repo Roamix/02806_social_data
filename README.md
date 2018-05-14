@@ -13,11 +13,9 @@ S14XXXX - Michael Jensen
 
 ## Setting up the server
 **Run this:**
-```$ python -m SimpleHTTPServer 8890```
+```$ python3 -m SimpleHTTPServer 8890```
 
-**Press this:**
-
-[Localhostlink](http://localhost:8890/assignment1/)
+**Press this:** [Localhostlink](http://localhost:8890/assignment1/)
 
 **????**
 
