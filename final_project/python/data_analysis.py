@@ -154,9 +154,6 @@ step = 2
 TRANGE_min = df_prcp_col.TRANGE.min()
 TRANGE_max = df_prcp_col.TRANGE.max()
 
-df_prcp_col.TRANGE.min()
-df_prcp_col.TRANGE.max()
-
 TRANGE_bins = [i for i in range(int(TRANGE_min),int(TRANGE_max),step)]
 
 #TRANGE_bins
@@ -202,24 +199,7 @@ ax.set_ylabel('Tempreture', fontsize=15)
 fig.tight_layout()
 plt.show()
 
-# %%
-
-
-step = 2
-prcp_bins = [i for i in range(int(df_prcp_col.PRCP.min()),30,step)]
-
-n_collisions_avg = []
-
-# Make prcp ranges
-for i in prcp_bins:
-    # for each range calculate average
-    avg = df_prcp_col.COLLISIONS[(df_prcp_col.PRCP.between(i,i+step))].mean()
-    n_collisions_avg.append(avg)
-
-
-# fig, ax = plt.subplots()
-# ax.scatter(prcp_bins,n_collisions_avg)
-
+# %% Crash Frequency as a function of Tempreture and Precipitation DATA
 x_p = []
 y_t = []
 s_c = []
@@ -239,12 +219,56 @@ s_c = [0 if math.isnan(x) else int(x) for x in s_c]
 
 # plt.hist(s_c,bins=20)
 
-fig, ax = plt.subplots()
-ax.scatter(x_p,y_t,s=s_c,alpha=0.3)
-ax.set_title('TITLE')
+# %% Crash Frequency as a function of Tempreture and Precipitation PLT
+
+fig , ax = plt.subplots()
+#ax.scatter(x_p,y_t,s=s_c,alpha=0.3)
+h = ax.hist2d(x_p,y_t,weights=s_c)
+ax.set_title('Crash Frequency as a function of Tempreture and Precipitation')
 ax.set_xlabel('Precipitation', fontsize=15)
 ax.set_ylabel('Tempreture', fontsize=15)
 
 #ax.grid(True)
 fig.tight_layout()
+plt.colorbar(h[3], ax=ax)
+plt.show()
+
+
+# %% Crash Frequency as a function of Tempreture and Precipitation DATA
+x_r = [] # RANGE
+y_t = []
+s_c = []
+
+df_prcp_col.TRANGE.max()
+
+step = 1
+TRANGE_bins = [i for i in range(int(TRANGE_min),int(TRANGE_max),step)]
+
+TMAX_bins = [i for i in range(int(TMAX_min),int(TMAX_max),step)]
+
+#prcp_bins = [i for i in range(int(df_prcp_col.PRCP.min()),30,step)]
+
+for x_ in TRANGE_bins:
+    for y_ in TMAX_bins:
+        x_r.append(x_)
+        y_t.append(y_)
+        cond_p = (df_prcp_col.TRANGE.between(x_,x_+step))
+        cond_t = (df_prcp_col.TMAX.between(y_,y_+step))
+        col = df_prcp_col.COLLISIONS[cond_p & cond_t].mean()
+        s_c.append(col)
+
+s_c = [0 if math.isnan(x) else int(x) for x in s_c]
+
+# %% Crash Frequency as a function of Tempreture and Precipitation PLT
+
+fig , ax = plt.subplots()
+#ax.scatter(x_p,y_t,s=s_c,alpha=0.3)
+h = ax.hist2d(x_r,y_t,weights=s_c)
+ax.set_title('Crash Frequency as a function of Tempreture and Precipitation')
+ax.set_xlabel('Temp rage', fontsize=15)
+ax.set_ylabel('Tempreture', fontsize=15)
+
+#ax.grid(True)
+fig.tight_layout()
+plt.colorbar(h[3], ax=ax)
 plt.show()
